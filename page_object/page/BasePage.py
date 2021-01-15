@@ -5,9 +5,11 @@ from selenium.webdriver.remote.webelement import WebElement
 from driver.Client import AndroidClient
 from selenium.webdriver.common.by import By
 import yaml
-
+import re
 
 class BasePage:
+    # 黑名单
+    element_black = [(By.XPATH, "ddd")]
     def __init__(self):
         self.driver = self.getDriver()
 
@@ -22,7 +24,30 @@ class BasePage:
 
     def find(self, *args) -> WebElement:
         # todo:处理各类弹窗
-        return self.driver.find_element(args)
+        return self.find(args)
+
+    def find(self, by, value):
+        # 重试3次  增加健壮性
+        for i in range(3):
+            try:
+                element = self.driver.find_element(by, value)
+            except Exception as e:
+                pass
+            finally:
+                # 处理弹框
+                # 找到页面的最顶级元素进行点击
+                #get_max_element.click()  递归算法求最顶层数据
+                pass
+                ## 黑名单
+                #self.driver.page_source
+                #for e in BasePage.element_black:
+                #    if re.match("sss", self.driver.page_source):
+                #       elements =  self.driver.find_element(*e)
+                #       if elements.__sizeof__() > 0:
+                #          elements[0].click()
+
+
+
 
     def findByText(self, text: str) -> WebElement:
         return self.driver.find(By.XPATH, '//*[@text={}]'.format(text))
