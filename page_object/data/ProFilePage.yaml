@@ -1,0 +1,4 @@
+ProFilePage:
+  - locator: //*[@text='点击登录']
+    by: xpath
+    action: click

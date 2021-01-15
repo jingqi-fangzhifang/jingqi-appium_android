@@ -1,0 +1,19 @@
+
+loginByPassword:
+  - locator: tv_login_by_phone_or_others
+    by: id
+    action: click
+  - locator: tv_login_with_account
+    by: id
+    action: click
+  - locator: login_account
+    by: id
+    action: sendKeys
+    text: $var1
+  - locator: login_password
+    by: id
+    action: sendKeys
+    text: $var2
+  - locator: button_next
+    by: id
+    action: click

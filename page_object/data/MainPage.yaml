@@ -1,0 +1,4 @@
+gotoProFile:
+  - locator: user_profile_icon
+    by: id
+    action: click
