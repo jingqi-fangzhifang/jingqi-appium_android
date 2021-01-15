@@ -1,6 +1,6 @@
 #!_*_coding:utf-8_*_
 #author:jingqi
-from driver.AndroidClient import AndroidClient
+from driver.Client import AndroidClient
 from page.BasePage import BasePage
 from page.MainPage import MainPage
 

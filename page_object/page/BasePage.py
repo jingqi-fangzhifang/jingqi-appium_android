@@ -2,7 +2,7 @@
 # author:jingqi
 from selenium.webdriver.remote.webelement import WebElement
 
-from driver.AndroidClient import AndroidClient
+from driver.Client import AndroidClient
 from selenium.webdriver.common.by import By
 import yaml
 
@@ -32,8 +32,16 @@ class BasePage:
         file = open(po_path, 'r')
         po_data = yaml.load(file)
         po_method = po_data[key]
+        if po_data.keys().__contains__("elements"):
+            po_elements = po_data["elements"]
         for step in po_method:
-            element = self.driver.find_element(by=step['by'], value=step['locator'])
+            step: dict
+            if step.keys().__contains__("element"):
+                element_platform = po_elements[step["element"]][AndroidClient.platform]
+            else:
+                element_platform = {"by":step["by"], "value": step["locator"]}
+            element = self.driver.find_element(by=element_platform['by'], value=element_platform['locator'])
+            #element = self.driver.find_element(by=step['by'], value=step['locator'])
             action = str(step["action"]).lower()
             # todo:定位失败 多数是因为弹窗， try exception 进入一个弹窗处理 元素的智能等待
             if action == "click":
@@ -42,6 +50,7 @@ class BasePage:
                 text = str(step['text'])
                 for k, v in kwargs.items():
                     text = text.replace("$%s"%k, v)
+                    print("update text: {}".format(text))
                 element.send_keys(text)
             else:
                 print("UNKNOW COMMAND {} ".format(step))

@@ -7,11 +7,9 @@ loginByPassword:
     by: id
     action: click
   - element: login_account
-    by: id
     action: sendKeys
     text: $var1
   - element: login_password
-    by: id
     action: sendKeys
     text: $var2
   - locator: button_next

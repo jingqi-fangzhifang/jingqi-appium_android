@@ -1,0 +1,28 @@
+install_app:
+  server: http://localhost:4723/wd/hub
+  implicitly_wait: 10
+  caps:
+    android:
+      platformName: Android
+      deviceName: demo
+      appActivity: com.xueqiu.android.main.view.MainActivity
+      appPackage: com.xueqiu.android
+      autoGrantpermissions: True
+    ios:
+
+
+restart_app:
+  server: http://localhost:4723/wd/hub
+  implicitly_wait: 10
+  caps:
+    android:
+      platformName: Android
+      deviceName: demo
+      appActivity: com.xueqiu.android.main.view.MainActivity
+      appPackage: com.xueqiu.android
+      autoGrantpermissions: True
+      resetKeyBoard: True
+      noReset: True
+      unicodeKeyboard: True
+
+platfrom: android
